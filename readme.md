@@ -41,9 +41,9 @@ Use the following steps to clone the following file in your already created note
 - New > Terminal
 
 ```
-wget https://github.com/mahendrabairagi/ASU_Hackathon/blob/master/ASU_hackathon_train_mascot_model_resnet18.ipynb -P SageMaker/
+cd SageMaker/
 
-wget https://github.com/mahendrabairagi/ASU_Hackathon/blob/master/ASU_hackathon_train_roadfollowing_model.ipynb -P SageMaker/
+git clone https://github.com/mahendrabairagi/ASU_Hackathon
 
 ```
 - Go to jupyter and open the newly downloaded ipynb notebook file by clicking 
