@@ -25,7 +25,7 @@ Choose Create role.
 Amazon SageMaker creates an IAM role named AmazonSageMaker-ExecutionRole-YYYYMMDDTHHmmSS. For example, AmazonSageMaker-ExecutionRole-20171125T090800.
 
 3. Choose Create notebook instance.
-In a few minutes, Amazon SageMaker launches an ML compute instance—in this case, a notebook instance—and attaches an ML storage volume to it. The notebook instance has a preconfigured Jupyter notebook server and a set of Anaconda libraries. For more information, see the CreateNotebookInstance API.
+In a few minutes, Amazon SageMaker launches an ML compute instance—in this case, a notebook instance—and attaches an ML storage volume to it. The notebook instance has a preconfigured Jupyter notebook server and a set of Anaconda libraries. 
 
 When the status of the notebook instance is InService, choose Open next to its name to open the Juypter dashboard.
 
@@ -34,7 +34,6 @@ When the status of the notebook instance is InService, choose Open next to its n
 The dashboard provides access to:
 
 A new tab that contains sample notebooks. To use a sample notebook, on the "Sagemaker Examples" tab, choose the sample notebook you would like to explore. For information about the sample notebooks, see the Amazon SageMaker GitHub repository.
-T.
 
 ### Step 2: To upload sample notebooks
 Use the following steps to clone the following file in your already created notebook instance:
