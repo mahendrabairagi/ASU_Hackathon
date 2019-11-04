@@ -1,6 +1,6 @@
 ## Instructions to create SageMaker Notebook and upload sample notebooks
 
-#### Step 1: Create SageMaker Notebook:
+### Step 1: Create SageMaker Notebook:
 
 ### To create an Amazon SageMaker notebook instance
 
