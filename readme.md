@@ -1,7 +1,6 @@
 ## Instructions to create SageMaker Notebook and upload sample notebooks
 
-#### Step 1:
-Create SageMaker Notebook:
+#### Step 1: Create SageMaker Notebook:
 
 ### To create an Amazon SageMaker notebook instance
 
@@ -27,6 +26,7 @@ Amazon SageMaker creates an IAM role named AmazonSageMaker-ExecutionRole-YYYYMMD
 
 3. Choose Create notebook instance.
 In a few minutes, Amazon SageMaker launches an ML compute instance—in this case, a notebook instance—and attaches an ML storage volume to it. The notebook instance has a preconfigured Jupyter notebook server and a set of Anaconda libraries. For more information, see the CreateNotebookInstance API.
+
 When the status of the notebook instance is InService, choose Open next to its name to open the Juypter dashboard.
 
 ![image 3](pic3.png)
@@ -34,24 +34,26 @@ When the status of the notebook instance is InService, choose Open next to its n
 The dashboard provides access to:
 
 A new tab that contains sample notebooks. To use a sample notebook, on the "Sagemaker Examples" tab, choose the sample notebook you would like to explore. For information about the sample notebooks, see the Amazon SageMaker GitHub repository.
-The kernels for Jupyter, including those that provide support for Python 2 and 3, Apache MXNet, TensorFlow, and PySpark. To choose a kernel for your notebook instance, use the New menu.
-For more information, see The Jupyter notebook.
-The result of the above steps is that you will have an appropriately-named S3 bucket to contain data and artifacts that will be generated and used by SageMaker, and you will have an available SageMaker notebook instance (Jupyter notebook) available for executing training.
+T.
 
-### Step 2
-### To upload sample notebooks
+### Step 2: To upload sample notebooks
 Use the following steps to clone the following file in your already created notebook instance:
 - Go to Jupyter
 - New > Terminal
 
 ```
 wget https://github.com/mahendrabairagi/ASU_Hackathon/blob/master/ASU_hackathon_train_mascot_model_resnet18.ipynb -P SageMaker/
+
 wget https://github.com/mahendrabairagi/ASU_Hackathon/blob/master/ASU_hackathon_train_roadfollowing_model.ipynb -P SageMaker/
 
 ```
-- Go to jupyter and open the newly downloaded ipynb notebook file by clicking "ASU_hackathon_train_mascot_model_resnet18.ipynb"
+- Go to jupyter and open the newly downloaded ipynb notebook file by clicking 
 
-### Step3
+"ASU_hackathon_train_mascot_model_resnet18.ipynb"
+
+"ASU_hackathon_train_roadfollowing_model.ipynb"
+
+### Step3: Using sample notebooks
 
 To create new Road Following model, follow instruction on ASU_hackathon_train_roadfollowing_model notebook
 
