@@ -39,6 +39,7 @@ The winning team is the team that completes all missions with the highest score.
 
 5) Design, develop and deploy new capabilities to JetBot
 
+## Step by step Instructions:
 
 #### 1. Assemble JetBot
 
