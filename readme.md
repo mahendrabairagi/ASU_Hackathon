@@ -61,7 +61,7 @@ https://github.com/NVIDIA-AI-IOT/jetbot/wiki/examples
 
 #### 2) Bring JetBot to life (have the JetBot spin on its own)
 
-[Follow AWS Robomaker instructions: ](ROBOMAKER_INSTRUCTIONS.md)
+[Follow AWS Robomaker instructions](ROBOMAKER_INSTRUCTIONS.md)
 
 
 #### 3) Bring JetBot to life Part 2 (have the JetBot navigate the track)
