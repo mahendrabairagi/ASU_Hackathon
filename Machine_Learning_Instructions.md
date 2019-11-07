@@ -12,7 +12,7 @@
 
 On the Create notebook instance page, provide the following information:
 - For Notebook instance name, type SageMakerWorkshop.
-- **For Instance type, choose CPU instances such as ml.m4.xlarge or GPU based instances ml.p3.2xLarge. VERY IMPORTANT - To avoid additional uncessary charge on your AWS account Please remember to stop notebook as soon as training is finished. 
+- :heavy_exclamation_mark::heavy_exclamation_mark::heavy_exclamation_mark: **For Instance type, choose CPU instances such as ml.m4.xlarge or GPU based instances ml.p3.2xLarge. VERY IMPORTANT - To avoid additional uncessary charge on your AWS account Please remember to stop notebook as soon as training is finished.**
 - For IAM role, create an IAM role.
 - Choose Create a new role.
 
