@@ -15,7 +15,7 @@ Let's get started!
 1. Choose the **Create Bucket** button to begin creating an S3 bucket
 
     - Bucket name: **\<Team-Name\>**-jetbot-detect
-    - Region: **US East**
+    - Region: **us-east-1**
 
     ![S3 create bucket view](instructions/s3_create_bucket.png)
 
@@ -36,7 +36,7 @@ You'll be using the AWS RoboMaker IDE to develop your Robot Application.  This I
         - Instance type: **m4.xlarge**
     - Networking
         - VPC: **(Default)**
-        - Subnets: **(us-east-1a)**
+        - Subnets: **select a subnet**
 
 1. This opens the environment’s detail page, click Open environment, which will open a new browser tab with the Cloud9 IDE.
 
@@ -98,7 +98,8 @@ The Welcome page provides helpful information to get started, but for now we are
     > melodic
     ```
 
-### Build and Bundle
+### Build and Bundle [~30 mins]
+**note research time for this step***
 1. Open the RoboMaker IDE and navigate to the terminal
 
 1. Change to the **jetbot-detect** directory and execute the `./scripts/build.sh` script
@@ -134,7 +135,7 @@ When a robot application is deployed to a physical robot, AWS RoboMaker does the
 
 1. Select the Software suite version used by your robot application.
 
-1. Provide the Amazon S3 path to your bundled robot application file. If this robot application is used only in simulations, specify a bundle built for the X86_64 platform. If you use this robot application in a fleet deployment, specify one or more bundles that represent the architectures of the robots in your fleet.
+1. Provide the Amazon S3 path to your bundled robot application file. If this robot application is used only in simulations, specify a bundle built for the ARM64 platform. If you use this robot application in a fleet deployment, specify one or more bundles that represent the architectures of the robots in your fleet.
 
 1. Choose Create.
 
@@ -183,10 +184,14 @@ To create a robot:
 
 
 ### Configure Robot with Certificates
-1. Use the following command to unzip your security resources:
+***NOTE: ADD specific instructions to scp files to the Robot***
+1. Use the following command to unzip your device certificates:
 
     ```
-    $ sudo unzip RobotName-setup.zip -d /greengrass
+    $ scp <greengrass-certs>.zip jetbot@<ip-addres>:/home/jetbot/greengrass-certs.zip
+    $ ssh jetbot@<ip-address>
+    $ sudo su -s /bin/bash
+    $ unzip /home/jetbot/<greengrass-certs>.zip -d /greengrass/ggc/certs
     ```
 
 ### Create a Fleet
