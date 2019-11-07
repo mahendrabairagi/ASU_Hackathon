@@ -74,14 +74,14 @@ The Welcome page provides helpful information to get started, but for now we are
 1. Install Ubuntu dependencies:
 
     ```
-    sudo apt install -y qemu-user-static
+    $ sudo apt install -y qemu-user-static
     ```
 
 1. Change to the `jetbot-detect` directory &  Build the ARM64 docker container
     ```
-    cd ~/environment/jetbot-detect/create-build-container
+    $ cd ~/environment/jetbot-detect/create-build-container
 
-    docker build -t jetbot-detect .
+    $ docker build -t jetbot-detect .
 
     ```
 
@@ -106,7 +106,7 @@ The Welcome page provides helpful information to get started, but for now we are
     ```
     # Build, bundle, and deploy the robot application to S3
     
-    ./scripts/build.sh <DOCKER-IMAGE-NAME> <S3-BUCKET-NAME>
+    $ ./scripts/build.sh <DOCKER-IMAGE-NAME> <S3-BUCKET-NAME>
     ```
 
 
