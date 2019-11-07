@@ -44,7 +44,8 @@ The winning team is the team that completes all missions with the highest score.
 
 I: Instructions to install WIFI card on the Jetson Nano board
 
-Please follow [Step 7 and Step 8 of following instructions](https://github.com/NVIDIA-AI-IOT/jetbot/wiki/hardware-setup#step-7---remove-jetson-nano-module-from-developer-kit)
+Please follow Step 7 and Step 8 of following instructions
+https://github.com/NVIDIA-AI-IOT/jetbot/wiki/hardware-setup#step-7---remove-jetson-nano-module-from-developer-kit
 
 II: Instructions to assemble Sparkfun JetBot kit
 
