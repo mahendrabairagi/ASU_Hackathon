@@ -81,7 +81,7 @@ The Welcome page provides helpful information to get started, but for now we are
     ```
     $ cd ~/environment/jetbot-detect/create-build-container
 
-    $ docker build -t jetbot-detect .
+    $ docker build -t jetbot-detect-build .
 
     ```
 
@@ -91,8 +91,9 @@ The Welcome page provides helpful information to get started, but for now we are
 1. Verify you can start up a container and run a basic ROS command:
 
     ```
-    # Change to the jetbot-detect
-    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect rosversion -d
+    $ cd ~/environment/jetbot-detect
+
+    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build rosversion -d
 
     # We should see the following result
     > melodic
@@ -102,11 +103,16 @@ The Welcome page provides helpful information to get started, but for now we are
 **note research time for this step***
 1. Open the RoboMaker IDE and navigate to the terminal
 
-1. Change to the **jetbot-detect** directory and execute the `./scripts/build.sh` script
+1. Change to the **jetbot-detect** directory and build & bundle the ROS application in a docker container
     ```
-    # Build, bundle, and deploy the robot application to S3
+    $ cd ~/environment/jetbot-detect
     
-    $ ./scripts/build.sh <DOCKER-IMAGE-NAME> <S3-BUCKET-NAME>
+    # Build and bundle the robot application
+    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build /environment/jetbot-detect/scripts/build.sh
+
+
+    # Copy the robot application to S3
+    $ aws s3 cp ./robot_ws/bundle/output.tar s3://<S3-BUCKET-NAME>/jetbot-detect/aarch64/output.tar
     ```
 
 
