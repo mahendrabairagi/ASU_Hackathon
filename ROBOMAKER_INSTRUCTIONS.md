@@ -184,20 +184,40 @@ To create a robot:
 
 1. In the Download your Core device page, choose Download to download and store your robot's security resources.
 
-1. Download AWS IoT Greengrass core software matching the architecture of your physical robot. To configure and run the AWS IoT Greengrass core software, follow the steps in Module 1: Environment Setup for Greengrass. Then follow the steps in Start AWS Greengrass on the Core Device.
 
 ![Download robot certificates](instructions/download-robot-certs.png)
 
 
 ### Configure Robot with Certificates
-***NOTE: ADD specific instructions to scp files to the Robot***
-1. Use the following command to unzip your device certificates:
+AWS RoboMaker uses X.509 certificates, managed subscriptions, AWS IoT policies, and IAM policies & roles to secure the applications that run on robots in your deployment environment.
+
+An AWS RoboMake robot is also a Greengrass core. Core devices use certificates and policies to securely connect to AWS IoT. The certificates and policies also allow AWS IoT Greengrass to deploy configuration information, Lambda functions, connectors, and managed subscriptions to core devices
+
+1. On your local machine, open a terminal and navigate to the location of the dowloaded security resources from the previous step.
+
+1. Locate the IP address of robot on the OLED
+![Sparkfun Jetbot OLED display](https://cdn.shopify.com/s/files/1/0915/1182/products/14532-SparkFun_Micro_OLED_Breakout__Qwiic_-01_300x.jpg)
+
+1. Unzip your device certificates to the robot:
 
     ```
-    $ scp <greengrass-certs>.zip jetbot@<ip-addres>:/home/jetbot/greengrass-certs.zip
+    # Copy the local security resources to the robot
+    $ scp /path/to/downladed-zip/<robot-certs>.zip jetbot@<ip-addres>:/home/jetbot/robomaker-robot-certs.zip
+
+    # SSH to the robot
     $ ssh jetbot@<ip-address>
+
+    # Switch to the root user
     $ sudo su -s /bin/bash
+
+    # Unzip the jetbot security credentials to greengrass certificate store
     $ unzip /home/jetbot/<greengrass-certs>.zip -d /greengrass/ggc/certs
+
+    # Exit the root shell
+    $ exit # or Ctrl-d
+
+    # Terminate the ssh connection
+    $ exit # or Ctrl-d
     ```
 
 ### Create a Fleet
