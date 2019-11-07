@@ -55,33 +55,35 @@ The Welcome page provides helpful information to get started, but for now we are
 1. Open the RoboMaker IDE and navigate to the terminal and clone this Git repo to the development machine:
     ```
     # change to the environment directory
-    cd ~/environment
+    $ cd ~/environment
 
-    git clone https://github.com/abest0/aws-nvidia-sample-robomaker-dino-detect.git jetbot-detect
+    $ git clone https://github.com/abest0/aws-nvidia-sample-robomaker-dino-detect.git jetbot-detect
     ```
 
 1. Execute the `generate_greengrass_certs` script as follows:
     ```
-    cd jetbot-detect
+    $ cd jetbot-detect
 
     # Generate greengrass certificates into the local repository
-    ./scripts/generate_greengrass_certs.sh
+    $ ./scripts/generate_greengrass_certs.sh
     ```
 
 ### Setup build resources
-1. Open the RoboMaker IDE and navigate to the console
+1. Open the RoboMaker IDE and navigate to the console.
 
-1. Install Ubuntu dependencies:
-
+1. Enable access to pull the jetbot-ros docker image
     ```
-    $ sudo apt install -y qemu-user-static
+    # The following command logs in to the an AWS Elastic Container Repository (ECR) to
+    # enable your machine to pull a base docker image
+    $ $(aws ecr get-login --no-include-email --registry-ids 593875212637 --region us-east-1)
     ```
 
-1. Change to the `jetbot-detect` directory &  Build the ARM64 docker container
-    ```
-    $ cd ~/environment/jetbot-detect/create-build-container
 
-    $ docker build -t jetbot-detect-build .
+1. Change to the `jetbot-detect/docker` directory &  Build the ARM64 docker container
+    ```
+    $ cd ~/environment/jetbot-detect/docker
+
+    $ docker build -t jetbot-ros .
 
     ```
 
@@ -93,10 +95,19 @@ The Welcome page provides helpful information to get started, but for now we are
     ```
     $ cd ~/environment/jetbot-detect
 
-    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build rosversion -d
+    $ docker run --rm -ti jetbot-ros
 
-    # We should see the following result
+    # You will be dropped into the shell of the docker container
+    # the prompt will be similar to the following root@83afb0b35322:/environment/jetbot-detect# 
+
+    $ rosversion --distro
+
+    # You should see the following result output
     > melodic
+
+
+    # Type exit or Ctrl-D, to exit the container
+
     ```
 
 ### Build and Bundle [~30 mins]
@@ -108,7 +119,23 @@ The Welcome page provides helpful information to get started, but for now we are
     $ cd ~/environment/jetbot-detect
     
     # Build and bundle the robot application
-    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build /environment/jetbot-detect/scripts/build.sh
+    $ docker run --rm -ti -v $(pwd):/environment/jetbot-detect jetbot-ros
+
+    # You will be dropped into the shell of the docker container
+    # the prompt will be similar to the following root@83afb0b35322:/environment/jetbot-detect# 
+
+    (docker)$ rosdep fix-permissions && rosdep update
+
+    (docker)$ cd robot_ws
+
+    (docker)$ rosdep install --from-paths src --ignore-src -r -y
+
+    (docker)$ colcon build
+
+    (docker)$ colcon bundle
+
+    # Type exit or Ctrl-D, to exit the container
+    (docker)$ exit
 
 
     # Copy the robot application to S3
@@ -279,4 +306,8 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
 
 ------
 
-**Congratulations, you've just completed your very first deployment.**
+Keep track of the progress of the deployment, when copying and extracting completes, the status will change to **Launching**.  
+
+Your robot will spin in place for 10 seconds.
+
+**Congratulations, you've just completed your very first deployment!**
