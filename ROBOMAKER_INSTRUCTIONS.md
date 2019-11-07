@@ -57,7 +57,7 @@ The Welcome page provides helpful information to get started, but for now we are
     # change to the environment directory
     $ cd ~/environment
 
-    $ git clone https://github.com/abest0/aws-nvidia-sample-robomaker-dino-detect.git jetbot-detect
+    $ git clone https://github.com/abest0/aws-robomaker-jetbot-detect.git jetbot-detect
     ```
 
 1. Execute the `generate_greengrass_certs` script as follows:
