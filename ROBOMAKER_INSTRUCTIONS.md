@@ -15,7 +15,7 @@ Let's get started!
 1. Choose the **Create Bucket** button to begin creating an S3 bucket
 
     - Bucket name: **\<Team-Name\>**-jetbot-detect
-    - Region: **US East**
+    - Region: **us-east-1**
 
     ![S3 create bucket view](instructions/s3_create_bucket.png)
 
@@ -36,7 +36,7 @@ You'll be using the AWS RoboMaker IDE to develop your Robot Application.  This I
         - Instance type: **m4.xlarge**
     - Networking
         - VPC: **(Default)**
-        - Subnets: **(us-east-1a)**
+        - Subnets: **select a subnet**
 
 1. This opens the environment’s detail page, click Open environment, which will open a new browser tab with the Cloud9 IDE.
 
@@ -74,14 +74,14 @@ The Welcome page provides helpful information to get started, but for now we are
 1. Install Ubuntu dependencies:
 
     ```
-    sudo apt install -y qemu-user-static
+    $ sudo apt install -y qemu-user-static
     ```
 
 1. Change to the `jetbot-detect` directory &  Build the ARM64 docker container
     ```
-    cd ~/environment/jetbot-detect/create-build-container
+    $ cd ~/environment/jetbot-detect/create-build-container
 
-    docker build -t jetbot-detect .
+    $ docker build -t jetbot-detect-build .
 
     ```
 
@@ -91,21 +91,28 @@ The Welcome page provides helpful information to get started, but for now we are
 1. Verify you can start up a container and run a basic ROS command:
 
     ```
-    # Change to the jetbot-detect
-    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect rosversion -d
+    $ cd ~/environment/jetbot-detect
+
+    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build rosversion -d
 
     # We should see the following result
     > melodic
     ```
 
-### Build and Bundle
+### Build and Bundle [~30 mins]
+**note research time for this step***
 1. Open the RoboMaker IDE and navigate to the terminal
 
-1. Change to the **jetbot-detect** directory and execute the `./scripts/build.sh` script
+1. Change to the **jetbot-detect** directory and build & bundle the ROS application in a docker container
     ```
-    # Build, bundle, and deploy the robot application to S3
+    $ cd ~/environment/jetbot-detect
     
-    ./scripts/build.sh <DOCKER-IMAGE-NAME> <S3-BUCKET-NAME>
+    # Build and bundle the robot application
+    $ docker run --rm -v $(pwd):/environment/jetbot-detect jetbot-detect-build /environment/jetbot-detect/scripts/build.sh
+
+
+    # Copy the robot application to S3
+    $ aws s3 cp ./robot_ws/bundle/output.tar s3://<S3-BUCKET-NAME>/jetbot-detect/aarch64/output.tar
     ```
 
 
@@ -134,7 +141,7 @@ When a robot application is deployed to a physical robot, AWS RoboMaker does the
 
 1. Select the Software suite version used by your robot application.
 
-1. Provide the Amazon S3 path to your bundled robot application file. If this robot application is used only in simulations, specify a bundle built for the X86_64 platform. If you use this robot application in a fleet deployment, specify one or more bundles that represent the architectures of the robots in your fleet.
+1. Provide the Amazon S3 path to your bundled robot application file. If this robot application is used only in simulations, specify a bundle built for the ARM64 platform. If you use this robot application in a fleet deployment, specify one or more bundles that represent the architectures of the robots in your fleet.
 
 1. Choose Create.
 
@@ -177,16 +184,40 @@ To create a robot:
 
 1. In the Download your Core device page, choose Download to download and store your robot's security resources.
 
-1. Download AWS IoT Greengrass core software matching the architecture of your physical robot. To configure and run the AWS IoT Greengrass core software, follow the steps in Module 1: Environment Setup for Greengrass. Then follow the steps in Start AWS Greengrass on the Core Device.
 
 ![Download robot certificates](instructions/download-robot-certs.png)
 
 
 ### Configure Robot with Certificates
-1. Use the following command to unzip your security resources:
+AWS RoboMaker uses X.509 certificates, managed subscriptions, AWS IoT policies, and IAM policies & roles to secure the applications that run on robots in your deployment environment.
+
+An AWS RoboMake robot is also a Greengrass core. Core devices use certificates and policies to securely connect to AWS IoT. The certificates and policies also allow AWS IoT Greengrass to deploy configuration information, Lambda functions, connectors, and managed subscriptions to core devices
+
+1. On your local machine, open a terminal and navigate to the location of the dowloaded security resources from the previous step.
+
+1. Locate the IP address of robot on the OLED
+![Sparkfun Jetbot OLED display](https://cdn.shopify.com/s/files/1/0915/1182/products/14532-SparkFun_Micro_OLED_Breakout__Qwiic_-01_300x.jpg)
+
+1. Unzip your device certificates to the robot:
 
     ```
-    $ sudo unzip RobotName-setup.zip -d /greengrass
+    # Copy the local security resources to the robot
+    $ scp /path/to/downladed-zip/<robot-certs>.zip jetbot@<ip-addres>:/home/jetbot/robomaker-robot-certs.zip
+
+    # SSH to the robot
+    $ ssh jetbot@<ip-address>
+
+    # Switch to the root user
+    $ sudo su -s /bin/bash
+
+    # Unzip the jetbot security credentials to greengrass certificate store
+    $ unzip /home/jetbot/<greengrass-certs>.zip -d /greengrass/ggc/certs
+
+    # Exit the root shell
+    $ exit # or Ctrl-d
+
+    # Terminate the ssh connection
+    $ exit # or Ctrl-d
     ```
 
 ### Create a Fleet
