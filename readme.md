@@ -76,3 +76,7 @@ II: To train new track navigation and mascots recognition models, follow
 ### 5 - Design, develop, and deploy new capabilities to JetBot
 
 Sky is the limit!
+
+Sample video 
+https://www.youtube.com/watch?v=Otbb4mF0jyg
+
