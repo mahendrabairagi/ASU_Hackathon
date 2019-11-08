@@ -47,6 +47,12 @@ I: Instructions to install WIFI card on the Jetson Nano board
 Please follow Step 7 and Step 8 of following instructions
 https://github.com/NVIDIA-AI-IOT/jetbot/wiki/hardware-setup#step-7---remove-jetson-nano-module-from-developer-kit
 
+- In rooms 214, 221 or 222 find location with a monitor, keyboard, mouse and HDMI cord setup.
+- Boot up JetBot by plugging into power
+- Connect monitor, keyboard and mouse to JetBot
+- Top right, select wifi icon > select "ASU Event" wifi and insert password
+- Once connected select gear icon in top right corner and select "shut down" option
+
 II: Instructions to assemble Sparkfun JetBot kit
 
 [Assembly guide for Sparkfun Jetbot](https://learn.sparkfun.com/tutorials/assembly-guide-for-sparkfun-jetbot-ai-kit)
