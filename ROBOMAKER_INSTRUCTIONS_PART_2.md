@@ -91,12 +91,16 @@ Machine learning resources represent cloud-trained inference models that are dep
 
 1. Under **Resources**, choose **Add a machine learning resource**
 
+    ![Add an ML resource to a Greengrass group](instructions/greengrass_add_ml_resource.png)
+
 1. Use the following values to create the resource:
     * **Resource Name**: *select a resource name*
     * **Model Source**: Choose *Upload a model in S3*
       * Locate the Model in S3 in your <S3-BUCKET-NAME>
     * **Local Path**: */trained_models*
     * **Lambda function affiliations**: *select your ml model detect* function with **Read and write access**
+
+    ![Add an ML resource to a Greengrass group](instructions/greengrass_add_ml_resource_detail.png)
 
 1. Choose **Save** 
 
