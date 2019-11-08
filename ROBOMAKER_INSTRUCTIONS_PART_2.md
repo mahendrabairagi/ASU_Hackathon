@@ -115,3 +115,40 @@ The ML Models stored in S3 should now be syncing to the Robot.  Additionally, wh
 
 Log in to the Robot and verify the ML models are being synced.
 
+---
+
+Now that ML models are being synced to the Robot, you'll deploy a ROS application to make use of the models. The ROS application built and bundled 
+in the last module contained the necessary make use of this model.  A new deployment targetingj 
+
+
+## Create a Deployment
+1. Sign in to the AWS RoboMaker console at https://console.aws.amazon.com/robomaker/
+
+1. In the left navigation pane, choose Fleet Management, and then choose Deployments.
+
+1. Click Create deployment.
+
+1. In the Create deployment page, under Configuration, select the Fleet created in the previous module.
+
+1. Select the Robot application.
+
+1. Select the Robot application version to deploy. The robot application must have a numbered `applicationVersion` for consistency reasons. If there are no versions listed, or to create a new version, see Creating a Robot Application Version.
+
+1. Under Deployment launch config, specify the Package name: `dinobot`
+
+1. Specify the Launch file: `start_search.launch`
+  
+1. Environment variables, type in an environment Name and Value. Environment variable names must start with A-Z or underscore and consist of A-Z, 0-9 and underscore. Names beginning with “AWS” are reserved.
+
+    - Add the following environment variables:
+        - **variable** = `MOTOR_CONTROLLER` **value** = `qwiic`
+
+1. Specify a Robot deployment timeout. Deployment to an individual robot will stop if it does not complete before the amount of time specified.
+
+1. Click **Create** to create the deployment job.
+
+![Create a deployment of a robot application to a robot](instructions/create-deployment.png)
+
+----
+
+Congratulations, you're Robot is now running with ML inference models to provide it with the ability to take on more challenging tasks. Forward!
