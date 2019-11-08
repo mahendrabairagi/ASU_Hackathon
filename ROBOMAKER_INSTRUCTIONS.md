@@ -80,7 +80,7 @@ The Welcome page provides helpful information to get started, but for now we are
 
 1. Install Ubuntu dependencies for cross compilation:
     ```
-    $ sudo apt-get install qemu-user-static
+    $ sudo apt update && sudo apt install -y qemu-user-static
     ```
 
 1. Change to the `jetbot-detect/docker` directory &  Build the ARM64 docker container
