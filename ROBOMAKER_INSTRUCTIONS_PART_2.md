@@ -1,4 +1,4 @@
-ASU Hackathon Setup Instructions
+ASU Hackathon Instructions
 ================
 
 You can train your inference models anywhere, deploy them locally as machine learning resources in a Greengrass group, and then access them from Greengrass Lambda functions. For example, you can build and train deep-learning models in Amazon SageMaker and deploy them to your Greengrass core.
@@ -83,13 +83,17 @@ Machine learning resources represent cloud-trained inference models that are dep
 
 1. Click **Add Lambda** and add an existing lambda function.  Select the Lambda function created in the last step
 
+1. Once the Lambda function is added, select the **Edit Configuration** in the upper right corner of the lambda function
+
+1. Under **Lambda Lifecycle**, choose **Make this function long-lived and keep it running indefinitely** and **Update**
+
 #### Add a ML Resource to a Greengrass group
 
 1. From the menu bar on the left side, select **Greengrass** > **Groups**, and click on the group corresponding to your Robot.
 
 1. In the Greengrass Group view, select **Resources** from the menu
 
-1. Under **Resources**, choose **Add a machine learning resource**
+1. Under **Resources**, choose **Machine Learning** > **Add a machine learning resource**
 
     ![Add an ML resource to a Greengrass group](instructions/greengrass_add_ml_resource.png)
 
@@ -103,6 +107,46 @@ Machine learning resources represent cloud-trained inference models that are dep
     ![Add an ML resource to a Greengrass group](instructions/greengrass_add_ml_resource_detail.png)
 
 1. Choose **Save** 
+
+#### Add a Local Resource to a Greengrass group
+You can configure Lambda functions to securely access local resources on the host Greengrass core device. Local resources refer to buses and peripherals that are physically present on the host, or file system volumes on the host OS. For more information, including requirements and constraints, see Access Local Resources with Lambda Functions and Connectors.
+
+1. From the menu bar on the left side, select **Greengrass** > **Groups**, and click on the group corresponding to your Robot.
+
+1. In the Greengrass Group view, select **Resources** from the menu
+
+    ![Add a local resource to a Greengrass group](instructions/greengrass_local_resource.png)
+
+1. Under **Resources**, choose **Local** > **Add local resource**
+
+    * **Resource name**: *select a resource name*
+    * **Resource type**: *Volume*
+    * **Source path**: `/tmp`
+    * **Destination path**: `/tmp`
+        *The destination path is the absolute path of the resource in the Lambda namespace. This location is inside the container that the function runs in.*
+
+    * Under Group Owner file access permission
+        * Select Automatically add OS group permissions of the Linux group that owns the resource.
+
+    ![Add a local resource to a Greengrass group](instructions/greengrass_local_resource_detail.png)
+
+1. Click **Save**
+
+#### Allowing Greengrass to access S3
+Greengrass must be granted access to the S3 service.  This access is configured by adding a IAM Policy for the Greengrass service role.
+
+1. From the AWS Management Console, navigate to the Identity and Access Management(IAM) service
+
+1. Select **Roles** from the menu bar on the left side and search for **Greengrass_ServiceRole**.
+
+    ![Add AmazonS3FullAccess policy](instructions/iam_role_summary.png)
+
+1. On the **Summary** view, click **Attach Policies** and search for **AmazonS3FullAccess**.
+
+    ![Add AmazonS3FullAccess policy](instructions/iam_role_policy_add.png)
+
+1. Click the check-box next to the name and select **Attach policy**.
+
 
 #### Deploy the Greengrass Group
 
@@ -118,7 +162,7 @@ Log in to the Robot and verify the ML models are being synced.
 ---
 
 Now that ML models are being synced to the Robot, you'll deploy a ROS application to make use of the models. The ROS application built and bundled 
-in the last module contained the necessary make use of this model.  A new deployment targetingj 
+in the last module contained the necessary code to make use of this model.  You'll create a new deployment for your robot specifying a different launch file.
 
 
 ## Create a Deployment
@@ -141,7 +185,7 @@ in the last module contained the necessary make use of this model.  A new deploy
 1. Environment variables, type in an environment Name and Value. Environment variable names must start with A-Z or underscore and consist of A-Z, 0-9 and underscore. Names beginning with “AWS” are reserved.
 
     - Add the following environment variables:
-        - **variable** = `MOTOR_CONTROLLER` **value** = `qwiic`
+        - **Key** = `MOTOR_CONTROLLER` **Value** = `qwiic`
 
 1. Specify a Robot deployment timeout. Deployment to an individual robot will stop if it does not complete before the amount of time specified.
 

@@ -78,6 +78,10 @@ The Welcome page provides helpful information to get started, but for now we are
     $ $(aws ecr get-login --no-include-email --registry-ids 593875212637 --region us-east-1)
     ```
 
+1. Install Ubuntu dependencies for cross compilation:
+    ```
+    $ sudo apt-get install qemu-user-static
+    ```
 
 1. Change to the `jetbot-detect/docker` directory &  Build the ARM64 docker container
     ```
@@ -111,7 +115,6 @@ The Welcome page provides helpful information to get started, but for now we are
     ```
 
 ### Build and Bundle [~30 mins]
-**note research time for this step***
 1. Open the RoboMaker IDE and navigate to the terminal
 
 1. Change to the **jetbot-detect** directory and build & bundle the ROS application in a docker container
@@ -160,13 +163,12 @@ When a robot application is deployed to a physical robot, AWS RoboMaker does the
 
 1. In the left pane, choose Development, and then choose Robot applications.
 
-1. Select Create robot application.
+1. Select **Create robot application**.
 
 1. In the Create robot application page, type a Name for the robot application. Choose a name that helps you identify the robot.
 
-1. Select the Robot software suite used by your robot application. For more information about the Robot Operating System (ROS), see www.ros.org
-
-1. Select the Software suite version used by your robot application.
+1. Select the Robot software suite used by your robot application
+    * Select *ROS Melodic*
 
 1. Provide the Amazon S3 path to your bundled robot application file. If this robot application is used only in simulations, specify a bundle built for the ARM64 platform. If you use this robot application in a fleet deployment, specify one or more bundles that represent the architectures of the robots in your fleet.
 
@@ -187,7 +189,7 @@ When a robot application is deployed to a physical robot, AWS RoboMaker does the
 
 To create a robot:
 
-1. Sign in to the AWS RoboMaker console at https://console.aws.amazon.com/robomaker/
+1. Sign in to the AWS RoboMaker console 
 
 1. In the left navigation pane, choose Fleet Management, and then choose Robots.
 
@@ -198,18 +200,17 @@ To create a robot:
 1. Select the Architecture of the robot.
   1. Select the ARM64 architecture for the Sparkfun Robot
 
-1. Under AWS IoT Greengrass group defaults, select a Create new to create a new AWS IoT Greengrass group for the robot. Optionally, you can select an existing AWS IoT Greengrass group. Each robot must have its own AWS IoT Greengrass group.
+1. Under AWS IoT Greengrass group defaults, select a Create new to create a new AWS IoT Greengrass group for the robot. 
+    *Optionally, you can select an existing AWS IoT Greengrass group. Each robot must have its own AWS IoT Greengrass group.*
 
-1. If you use an existing AWS IoT Greengrass group, it must have an IAM role associated with it. To create the role, see Create deployment role.
-
-1. Optionally, modify the Greengrass prefix. This string is prepended to AWS IoT Greengrass objects created on your behalf.
+    1. If you use an existing AWS IoT Greengrass group, it must have an IAM role associated with it. To create the role, see Create deployment role.
 
 1. Select a IAM role to assign to the AWS IoT Greengrass group created for the robot. It grants permissions for AWS IoT Greengrass to access your robot application in Amazon S3 and read update status from AWS RoboMaker.
 
 1. Choose Create.
 ![Create Robot](instructions/create-robot.png)
 
-1. In the Download your Core device page, choose Download to download and store your robot's security resources.
+1. In the **Download your Core device** page, choose **Download** to download and store your robot's security resources.
 
 
 ![Download robot certificates](instructions/download-robot-certs.png)
@@ -238,7 +239,7 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
     $ sudo su -s /bin/bash
 
     # Unzip the jetbot security credentials to greengrass certificate store
-    $ unzip /home/jetbot/<greengrass-certs>.zip -d /greengrass/ggc/certs
+    $ unzip /home/jetbot/<greengrass-certs>.zip -d /greengrass
 
     # Exit the root shell
     $ exit # or Ctrl-d
@@ -248,16 +249,16 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
     ```
 
 ### Create a Fleet
-1. Sign in to the AWS RoboMaker console at https://console.aws.amazon.com/robomaker/
+1. Sign in to the AWS RoboMaker
 
-1. In the left navigation pane, choose Fleet Management, and then choose fleets.
+1. In the left navigation pane, under **Fleet Management**, and then choose **Fleets**.
 
 1. Select Create fleet.
 
     - In the Create fleet page, type a name for the fleet.
 
 
-1. Click Create to create the deployment job.
+1. Click Create to create the fleet.
 
 ![Create a robot fleet to customize deployments](instructions/create-fleet-2.png)
 
@@ -295,7 +296,7 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
 1. Environment variables, type in an environment Name and Value. Environment variable names must start with A-Z or underscore and consist of A-Z, 0-9 and underscore. Names beginning with “AWS” are reserved.
 
     - Add the following environment variables:
-        - **variable** = `MOTOR_CONTROLLER` **value** = `qwiic`
+        - **Key** = `MOTOR_CONTROLLER` **Value** = `qwiic`
 
 1. Specify a Robot deployment timeout. Deployment to an individual robot will stop if it does not complete before the amount of time specified.
 
