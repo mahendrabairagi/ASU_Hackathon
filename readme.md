@@ -63,7 +63,8 @@ Follow steps for Example 1 - [Basic Motion]( https://github.com/NVIDIA-AI-IOT/je
 
 ### 3 - Bring JetBot to life Part 2 (have the JetBot navigate the track)
 
-TBD
+[Sync ML Models to the Robot](ROBOMAKER_INSTRUCTIONS_PART_2.md)
+
 
 ### 4 - Have JetBot navigate the track and recognize school mascots
 
