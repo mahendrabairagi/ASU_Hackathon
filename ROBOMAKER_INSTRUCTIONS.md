@@ -248,6 +248,40 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
     $ exit # or Ctrl-d
     ```
 
+### Update Robot devices
+1. From the Robomaker IDE, download `resources/90-i2c.rules` **DO NOT CHANGE THE NAME**
+
+1. From a console on you local machine, copy the downladed file to the Robot:
+    ```
+    # Change to the directory where you downloaded the rules file
+    $ scp 90-i2c.rules jebot@<ip-address>:/home/jetbot/90-i2c.rules
+    ```
+1. Connect to the robot and execute the following:
+
+    ```
+    # Change the owner of the file
+    $ sudo chown root:root 90-i2c.rules
+
+    # Move the file to udev
+    $ sudo cp 90-i2c.rules /etc/udev/rules.d
+    ```
+
+1. Reload device permissions
+    ```
+    $ sudo udevadm control --reload && sudo udevadm trigger
+
+    # Verify the updated permissions are in effect
+    $ ls -la /dev/i2c-1
+
+    # You should see permissions like the following
+    # Ensure UID = ggc_user and GID = i2c
+    #
+    #              UID      GID 
+    #              ^^^      ^^^ 
+    > crw-rw---- 1 ggc_user i2c 89, 1 Nov  8 16:16 /dev/i2c-1
+    ```
+
+
 ### Create a Fleet
 1. Sign in to the AWS RoboMaker
 
