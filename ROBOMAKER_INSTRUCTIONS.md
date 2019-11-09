@@ -288,7 +288,7 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
 
 1. Select the Robot application version to deploy. The robot application must have a numbered `applicationVersion` for consistency reasons. If there are no versions listed, or to create a new version, see Creating a Robot Application Version.
 
-1. Under Deployment launch config, specify the Package name: `dinobot`
+1. Under Deployment launch config, specify the Package name: `jetbot-detect`
 
 1. Specify the Launch file: `circle.launch`
   
