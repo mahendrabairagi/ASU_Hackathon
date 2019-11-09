@@ -254,7 +254,7 @@ An AWS RoboMake robot is also a Greengrass core. Core devices use certificates a
 1. From a console on you local machine, copy the downladed file to the Robot:
     ```
     # Change to the directory where you downloaded the rules file
-    $ scp 90-i2c.rules jebot@<ip-address>:/home/jetbot/90-i2c.rules
+    $ scp 90-i2c.rules jetbot@<ip-address>:/home/jetbot/90-i2c.rules
     ```
 1. Connect to the robot and execute the following:
 
