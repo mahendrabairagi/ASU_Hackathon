@@ -12,7 +12,7 @@ Let's get started!
 
 As an object store, S3 provides the capability to store various types of data.  You're already using it to store a bundled ROS application.  Now you'll use it make ML models available to a robot using AWS Greengrass.
 
-1. Locate the `best_steering_model_xy.pth` model
+1. Locate the [`best_steering_model_xy.pth` model](https://asu-hackathon-bestadam.s3.amazonaws.com/best_steering_model_xy.pth)
 
 1. Create a zip archive of your ML models
     ```
