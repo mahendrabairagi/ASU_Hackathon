@@ -109,6 +109,7 @@ def move_bot(image, robot_stop):
     
 while True:
     img = camera.value
+    robot_stop = False
     probs, classes = find_mascot({'new': img}) 
     msg = "Start..."
     s3url = ""
