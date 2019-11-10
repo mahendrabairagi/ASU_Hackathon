@@ -8,7 +8,6 @@ import numpy as np
 import cv2
 import torchvision.transforms as transforms
 import PIL.Image
-import boto3
 from jetbot import Camera
 
 model_roadfollow = torchvision.models.resnet18(pretrained=False)
