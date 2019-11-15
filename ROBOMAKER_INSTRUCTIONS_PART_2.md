@@ -53,7 +53,7 @@ Machine learning resources represent cloud-trained inference models that are dep
 
 1. Choose **Create Function**
 
-1. Open the AWS RoboMaker Cloud9 development environment in another tab and navigate to the `greengrass_model_sync/mlModelSync.py`
+1. Open the AWS RoboMaker Cloud9 development environment in another tab and navigate to the [`greengrass_model_sync/mlModelSync.py`](https://github.com/abest0/aws-robomaker-jetbot-detect/blob/master/greengrass_model_sync/mlModelSync.py)
 
 1. Copy the contents of this file and navigate back to the Lambda Function page
 
